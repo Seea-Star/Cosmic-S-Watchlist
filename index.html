@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMIC-S - Watchlist</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #f5f5f7;
+      background-image: 
+        linear-gradient(#e1e1e6 1px, transparent 1px),
+        linear-gradient(90deg, #e1e1e6 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #111111;
+      font-family: 'Quicksand', sans-serif;
+      padding: 30px 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .site-wrapper {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .top-banner {
+      background: #111111;
+      border: 2px solid #111111;
+      border-radius: 20px;
+      padding: 12px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 4px 4px 0px #111111;
+    }
+
+    .top-banner h1 { 
+      font-size: 2rem; 
+      font-weight: 800; 
+      letter-spacing: 2px; 
+      color: #ffffff;
+    }
+
+    .watchlist-scroll-area { 
+      max-height: 600px; 
+      overflow-y: auto; 
+      padding-right: 5px;
+    }
+
+    .watchlist-scroll-area::-webkit-scrollbar {
+      width: 8px;
+    }
+    .watchlist-scroll-area::-webkit-scrollbar-track {
+      background: #f0f0f3;
+      border-radius: 4px;
+    }
+    .watchlist-scroll-area::-webkit-scrollbar-thumb {
+      background: #111111;
+      border-radius: 4px;
+    }
+
+    /* Modalità Desktop: colonne multiple */
+    .watchlist-grid {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    /* Modalità Telefono: una sola colonna */
+    @media (max-width: 768px) {
+      .watchlist-grid {
+        column-count: 1;
+      }
+    }
+
+    .watchlist-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .watchlist-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: none;
+      box-shadow: none;
+      filter: none;
+      transition: filter 0.3s ease, transform 0.3s ease;
+      -webkit-touch-callout: none;
+      pointer-events: auto;
+    }
+
+    /* Effetto Hover interattivo facoltativo */
+    .watchlist-item.interactive:hover .watchlist-img {
+      filter: blur(6px) brightness(0.7);
+      transform: scale(1.03);
+    }
+
+    .watchlist-overlay-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.85);
+      color: #ffffff;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .watchlist-item.interactive:hover .watchlist-overlay-card {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .overlay-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #F3EEDA;
+      margin-bottom: 6px;
+    }
+
+    .overlay-text {
+      font-size: 0.72rem;
+      line-height: 1.4;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .overlay-disclaimer {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #F3EEDA;
+      border-top: 1px dashed rgba(255, 255, 255, 0.3);
+      padding-top: 6px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <div class="site-wrapper">
+
+    <header class="top-banner">
+      <h1>WATCHLIST</h1>
+      <a href="https://seea-star.github.io/Cosmic-S-Home/" style="background:#F3EEDA; color:#111; border:2px solid #111; padding:8px 14px; border-radius:12px; font-weight:800; font-size:0.75rem; text-decoration:none; box-shadow:2px 2px 0px #111;">← HOME</a>
+    </header>
+
+    <div class="watchlist-scroll-area">
+      <div class="watchlist-grid">
+        <div class="watchlist-item"><img src="./watchlist-01.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item"><img src="./watchlist-02.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item"><img src="./watchlist-03.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item"><img src="./watchlist-04.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
