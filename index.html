@@ -51,6 +51,39 @@
       color: #ffffff;
     }
 
+    /* Stile per la barra dei filtri a bottoni */
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+
+    .filter-btn {
+      background: #ffffff;
+      color: #111111;
+      border: 2px solid #111111;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #111111;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #111111;
+      background: #F3EEDA;
+    }
+
+    .filter-btn:active, .filter-btn.active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #111111;
+      background: #F3EEDA;
+    }
+
     .watchlist-scroll-area { 
       max-height: 600px; 
       overflow-y: auto; 
@@ -88,6 +121,12 @@
       position: relative;
       overflow: hidden;
       border-radius: 12px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .watchlist-item.hidden {
+      display: none;
     }
 
     .watchlist-img {
@@ -102,60 +141,6 @@
       -webkit-touch-callout: none;
       pointer-events: auto;
     }
-
-    /* Effetto Hover interattivo facoltativo */
-    .watchlist-item.interactive:hover .watchlist-img {
-      filter: blur(6px) brightness(0.7);
-      transform: scale(1.03);
-    }
-
-    .watchlist-overlay-card {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(17, 17, 17, 0.85);
-      color: #ffffff;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 12px;
-      pointer-events: none;
-    }
-
-    .watchlist-item.interactive:hover .watchlist-overlay-card {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .overlay-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #F3EEDA;
-      margin-bottom: 6px;
-    }
-
-    .overlay-text {
-      font-size: 0.72rem;
-      line-height: 1.4;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .overlay-disclaimer {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: #F3EEDA;
-      border-top: 1px dashed rgba(255, 255, 255, 0.3);
-      padding-top: 6px;
-      letter-spacing: 0.5px;
-    }
   </style>
 </head>
 <body oncontextmenu="return false;">
@@ -167,16 +152,45 @@
       <a href="https://seea-star.github.io/Cosmic-S-Home/" style="background:#F3EEDA; color:#111; border:2px solid #111; padding:8px 14px; border-radius:12px; font-weight:800; font-size:0.75rem; text-decoration:none; box-shadow:2px 2px 0px #111;">← HOME</a>
     </header>
 
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filterSelection('all')">✦ ALL</button>
+      <button class="filter-btn" onclick="filterSelection('anime')">🍥 ANIME</button>
+      <button class="filter-btn" onclick="filterSelection('films')">🎬 FILMS</button>
+      <button class="filter-btn" onclick="filterSelection('series')">📺 SERIES</button>
+    </div>
+
     <div class="watchlist-scroll-area">
       <div class="watchlist-grid">
-        <div class="watchlist-item"><img src="./watchlist-01.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item"><img src="./watchlist-02.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item"><img src="./watchlist-03.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item"><img src="./watchlist-04.png" alt="Watchlist Item" class="watchlist-img" oncontextmenu="return false;"></div>
-      </div>
+        <div class="watchlist-item" data-category="anime"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item" data-category="anime"><img src="./watchlist-02.png" alt="Spy x Family" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item" data-category="anime"><img src="./watchlist-03.png" alt="Saiki K" class="watchlist-img" oncontextmenu="return false;"></div>
+        <div class="watchlist-item" data-category="anime"><img src="./watchlist-04.png" alt="Attack on Titan" class="watchlist-img" oncontextmenu="return false;"></div>
+        </div>
     </div>
 
   </div>
+
+  <script>
+    function filterSelection(category) {
+      const items = document.getElementsByClassName('watchlist-item');
+      const buttons = document.getElementsByClassName('filter-btn');
+
+      // Gestione classe active sui bottoni
+      for (let btn of buttons) {
+        btn.classList.remove('active');
+      }
+      event.target.classList.add('active');
+
+      // Mostra o nascondi gli elementi in base alla categoria
+      for (let item of items) {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      }
+    }
+  </script>
 
 </body>
 </html>
