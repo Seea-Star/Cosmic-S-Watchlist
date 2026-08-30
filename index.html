@@ -30,7 +30,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 30px;
     }
 
     .top-banner {
@@ -51,43 +51,13 @@
       color: #ffffff;
     }
 
-    /* Stile per la barra dei filtri a bottoni */
-    .filter-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 5px;
-    }
-
-    .filter-btn {
-      background: #ffffff;
-      color: #111111;
-      border: 2px solid #111111;
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      cursor: pointer;
-      box-shadow: 3px 3px 0px #111111;
-      transition: all 0.15s ease;
-    }
-
-    .filter-btn:hover {
-      transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0px #111111;
-      background: #F3EEDA;
-    }
-
-    .filter-btn:active, .filter-btn.active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #111111;
-      background: #F3EEDA;
-    }
-
     .watchlist-scroll-area { 
-      max-height: 600px; 
+      max-height: 700px; 
       overflow-y: auto; 
       padding-right: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
     }
 
     .watchlist-scroll-area::-webkit-scrollbar {
@@ -102,13 +72,23 @@
       border-radius: 4px;
     }
 
-    /* Modalità Desktop: colonne multiple */
+    /* Stile per i titoli delle sezioni */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #111111;
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+
+    /* Griglia interna per ogni sezione */
     .watchlist-grid {
       column-count: 3;
       column-gap: 20px;
     }
 
-    /* Modalità Telefono: una sola colonna */
     @media (max-width: 768px) {
       .watchlist-grid {
         column-count: 1;
@@ -125,10 +105,6 @@
       width: 100%;
     }
 
-    .watchlist-item.hidden {
-      display: none;
-    }
-
     .watchlist-img {
       width: 100%;
       height: auto;
@@ -137,9 +113,13 @@
       border: none;
       box-shadow: none;
       filter: none;
-      transition: filter 0.3s ease, transform 0.3s ease;
+      transition: transform 0.3s ease;
       -webkit-touch-callout: none;
       pointer-events: auto;
+    }
+
+    .watchlist-item:hover .watchlist-img {
+      transform: scale(1.02);
     }
   </style>
 </head>
@@ -152,49 +132,40 @@
       <a href="https://seea-star.github.io/Cosmic-S-Home/" style="background:#F3EEDA; color:#111; border:2px solid #111; padding:8px 14px; border-radius:12px; font-weight:800; font-size:0.75rem; text-decoration:none; box-shadow:2px 2px 0px #111;">← HOME</a>
     </header>
 
-    <div class="filter-buttons">
-      <button class="filter-btn active" onclick="filterSelection('all')">ALL</button>
-      <button class="filter-btn" onclick="filterSelection('anime')">ANIME</button>
-      <button class="filter-btn" onclick="filterSelection('films')">FILMS</button>
-      <button class="filter-btn" onclick="filterSelection('series')">SERIES</button>
-      <button class="filter-btn" onclick="filterSelection('books')">BOOKS</button>
-    </div>
-
     <div class="watchlist-scroll-area">
-      <div class="watchlist-grid">
-        
-        <div class="watchlist-item" data-category="anime"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item" data-category="anime"><img src="./watchlist-02.png" alt="Spy x Family" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item" data-category="films"><img src="./watchlist-05.png" alt="We Need to Talk About Kevin" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item" data-category="anime"><img src="./watchlist-03.png" alt="Saiki K" class="watchlist-img" oncontextmenu="return false;"></div>
-        <div class="watchlist-item" data-category="anime"><img src="./watchlist-04.png" alt="Attack on Titan" class="watchlist-img" oncontextmenu="return false;"></div>
-        
+      
+      <!-- SEZIONE ANIME -->
+      <div class="watchlist-section">
+        <h2 class="section-title">ANIME</h2>
+        <div class="watchlist-grid">
+          <div class="watchlist-item"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-02.png" alt="Spy x Family" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-03.png" alt="Saiki K" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-04.png" alt="Attack on Titan" class="watchlist-img" oncontextmenu="return false;"></div>
         </div>
+      </div>
+
+      <!-- SEZIONE FILMS -->
+      <div class="watchlist-section">
+        <h2 class="section-title">FILMS</h2>
+        <div class="watchlist-grid">
+          <div class="watchlist-item"><img src="./watchlist-05.png" alt="We Need to Talk About Kevin" class="watchlist-img" oncontextmenu="return false;"></div>
+        </div>
+      </div>
+
+      <!-- SEZIONE SERIES (Puoi aggiungere altre sezioni così) -->
+      <!--
+      <div class="watchlist-section">
+        <h2 class="section-title">SERIES</h2>
+        <div class="watchlist-grid">
+          <div class="watchlist-item"><img src="./tuo-file.png" alt="Series" class="watchlist-img"></div>
+        </div>
+      </div>
+      -->
+
     </div>
 
   </div>
-
-  <script>
-    function filterSelection(category) {
-      const items = document.getElementsByClassName('watchlist-item');
-      const buttons = document.getElementsByClassName('filter-btn');
-
-      // Gestione classe active sui bottoni
-      for (let btn of buttons) {
-        btn.classList.remove('active');
-      }
-      event.target.classList.add('active');
-
-      // Mostra o nascondi gli elementi in base alla categoria
-      for (let item of items) {
-        if (category === 'all' || item.getAttribute('data-category') === category) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      }
-    }
-  </script>
 
 </body>
 </html>
