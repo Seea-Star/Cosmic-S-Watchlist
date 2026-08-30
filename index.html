@@ -30,7 +30,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 20px;
     }
 
     .top-banner {
@@ -51,13 +51,42 @@
       color: #ffffff;
     }
 
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+
+    .filter-btn {
+      background: #ffffff;
+      color: #111111;
+      border: 2px solid #111111;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #111111;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #111111;
+      background: #F3EEDA;
+    }
+
+    .filter-btn.active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px #111111;
+      background: #F3EEDA;
+    }
+
     .watchlist-scroll-area { 
-      max-height: 700px; 
+      max-height: 600px; 
       overflow-y: auto; 
       padding-right: 5px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
     }
 
     .watchlist-scroll-area::-webkit-scrollbar {
@@ -72,18 +101,15 @@
       border-radius: 4px;
     }
 
-    /* Stile per i titoli delle sezioni */
-    .section-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      border-bottom: 2px solid #111111;
-      padding-bottom: 5px;
-      display: inline-block;
+    /* Gestione delle sezioni (visibili o nascoste dai bottoni) */
+    .watchlist-section {
+      display: none;
     }
 
-    /* Griglia interna per ogni sezione */
+    .watchlist-section.active-section {
+      display: block;
+    }
+
     .watchlist-grid {
       column-count: 3;
       column-gap: 20px;
@@ -112,7 +138,6 @@
       border-radius: 12px;
       border: none;
       box-shadow: none;
-      filter: none;
       transition: transform 0.3s ease;
       -webkit-touch-callout: none;
       pointer-events: auto;
@@ -132,11 +157,30 @@
       <a href="https://seea-star.github.io/Cosmic-S-Home/" style="background:#F3EEDA; color:#111; border:2px solid #111; padding:8px 14px; border-radius:12px; font-weight:800; font-size:0.75rem; text-decoration:none; box-shadow:2px 2px 0px #111;">← HOME</a>
     </header>
 
+    <!-- Bottoni in alto -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="showSection('all', event)">ALL</button>
+      <button class="filter-btn" onclick="showSection('anime', event)">ANIME</button>
+      <button class="filter-btn" onclick="showSection('films', event)">FILMS</button>
+      <button class="filter-btn" onclick="showSection('series', event)">SERIES</button>
+      <button class="filter-btn" onclick="showSection('books', event)">BOOKS</button>
+    </div>
+
     <div class="watchlist-scroll-area">
       
-      <!-- SEZIONE ANIME -->
-      <div class="watchlist-section">
-        <h2 class="section-title">ANIME</h2>
+      <!-- 1. SEZIONE ALL / HALL (Ci metti tutte le immagini insieme) -->
+      <div id="section-all" class="watchlist-section active-section">
+        <div class="watchlist-grid">
+          <div class="watchlist-item"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-02.png" alt="Spy x Family" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-05.png" alt="Film" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-03.png" alt="Saiki K" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-04.png" alt="Attack on Titan" class="watchlist-img" oncontextmenu="return false;"></div>
+        </div>
+      </div>
+
+      <!-- 2. SEZIONE ANIME -->
+      <div id="section-anime" class="watchlist-section">
         <div class="watchlist-grid">
           <div class="watchlist-item"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
           <div class="watchlist-item"><img src="./watchlist-02.png" alt="Spy x Family" class="watchlist-img" oncontextmenu="return false;"></div>
@@ -145,27 +189,49 @@
         </div>
       </div>
 
-      <!-- SEZIONE FILMS -->
-      <div class="watchlist-section">
-        <h2 class="section-title">FILMS</h2>
+      <!-- 3. SEZIONE FILMS -->
+      <div id="section-films" class="watchlist-section">
         <div class="watchlist-grid">
-          <div class="watchlist-item"><img src="./watchlist-05.png" alt="We Need to Talk About Kevin" class="watchlist-img" oncontextmenu="return false;"></div>
+          <div class="watchlist-item"><img src="./watchlist-05.png" alt="Film" class="watchlist-img" oncontextmenu="return false;"></div>
         </div>
       </div>
 
-      <!-- SEZIONE SERIES (Puoi aggiungere altre sezioni così) -->
-      <!--
-      <div class="watchlist-section">
-        <h2 class="section-title">SERIES</h2>
+      <!-- 4. SEZIONE SERIES -->
+      <div id="section-series" class="watchlist-section">
         <div class="watchlist-grid">
-          <div class="watchlist-item"><img src="./tuo-file.png" alt="Series" class="watchlist-img"></div>
+          <!-- Aggiungi qui le serie -->
         </div>
       </div>
-      -->
+
+      <!-- 5. SEZIONE BOOKS -->
+      <div id="section-books" class="watchlist-section">
+        <div class="watchlist-grid">
+          <!-- Aggiungi qui i libri -->
+        </div>
+      </div>
 
     </div>
 
   </div>
+
+  <script>
+    function showSection(sectionName, event) {
+      // Nascondi tutte le sezioni
+      const sections = document.getElementsByClassName('watchlist-section');
+      for (let sec of sections) {
+        sec.classList.remove('active-section');
+      }
+
+      // Rimuovi la classe active da tutti i bottoni
+      const buttons = document.getElementsByClassName('filter-btn');
+      for (let btn of buttons) {
+        btn.classList.remove('active');
+      }
+
+      // Mostra la sezione scelta e attiva il bottone corrispondente
+      document.getElementById('section- ' + sectionName).classList.add('active-section'); // (Attenzione allo spazio, usa 'section-' + sectionName)
+    }
+  </script>
 
 </body>
 </html>
