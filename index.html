@@ -101,7 +101,7 @@
       border-radius: 4px;
     }
 
-    /* Gestione delle sezioni (visibili o nascoste dai bottoni) */
+    /* Gestione delle sezioni */
     .watchlist-section {
       display: none;
     }
@@ -157,7 +157,7 @@
       <a href="https://seea-star.github.io/Cosmic-S-Home/" style="background:#F3EEDA; color:#111; border:2px solid #111; padding:8px 14px; border-radius:12px; font-weight:800; font-size:0.75rem; text-decoration:none; box-shadow:2px 2px 0px #111;">← HOME</a>
     </header>
 
-    <!-- Bottoni in alto -->
+    <!-- Bottoni -->
     <div class="filter-buttons">
       <button class="filter-btn active" onclick="showSection('all', event)">ALL</button>
       <button class="filter-btn" onclick="showSection('anime', event)">ANIME</button>
@@ -168,7 +168,7 @@
 
     <div class="watchlist-scroll-area">
       
-      <!-- 1. SEZIONE ALL / HALL (Ci metti tutte le immagini insieme) -->
+      <!-- 1. SEZIONE ALL (Tutto insieme) -->
       <div id="section-all" class="watchlist-section active-section">
         <div class="watchlist-grid">
           <div class="watchlist-item"><img src="./watchlist-01.png" alt="Naruto" class="watchlist-img" oncontextmenu="return false;"></div>
@@ -228,8 +228,9 @@
         btn.classList.remove('active');
       }
 
-      // Mostra la sezione scelta e attiva il bottone corrispondente
-      document.getElementById('section- ' + sectionName).classList.add('active-section'); // (Attenzione allo spazio, usa 'section-' + sectionName)
+      // Mostra la sezione selezionata e illumina il rispettivo bottone
+      document.getElementById('section-' + sectionName).classList.add('active-section');
+      event.currentTarget.classList.add('active');
     }
   </script>
 
